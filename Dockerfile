@@ -1,7 +1,9 @@
 # Stage 1: Build dependencies (includes C toolchain for PyMuPDF)
 FROM python:3.14-alpine AS build
 
-RUN apk add --no-cache \
+ARG CACHE_BUST
+RUN apk upgrade --no-cache && \
+    apk add --no-cache \
     gcc \
     g++ \
     make \
@@ -14,7 +16,7 @@ RUN apk add --no-cache \
     jpeg-dev \
     openjpeg-dev \
     jbig2dec-dev \
-    zlib-dev \
+    'zlib-dev>=1.3.2' \
     swig
 
 RUN python -m venv /app/venv
@@ -41,7 +43,9 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PATH="/app/venv/bin:$PATH"
 
-RUN apk add --no-cache \
+ARG CACHE_BUST
+RUN apk upgrade --no-cache && \
+    apk add --no-cache \
     freetype \
     harfbuzz \
     jpeg \
@@ -49,8 +53,6 @@ RUN apk add --no-cache \
     jbig2dec \
     'zlib>=1.3.2' \
     libstdc++
-
-RUN apk upgrade --no-cache
 
 RUN adduser -D -h /app appuser
 

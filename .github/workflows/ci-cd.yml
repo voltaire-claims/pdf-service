@@ -98,6 +98,8 @@ jobs:
         with:
           context: .
           platforms: ${{ matrix.platform }}
+          build-args: |
+            CACHE_BUST=${{ github.run_id }}
           outputs: type=image,name=ghcr.io/voltaire-claims/pdf-service,push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=${{ matrix.platform }}
           cache-to: type=gha,scope=${{ matrix.platform }},mode=max
