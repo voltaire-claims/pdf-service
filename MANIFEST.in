@@ -1,0 +1,6 @@
+graft src
+graft typings
+include pyproject.toml
+include README.md
+include LICENSE.md
+global-exclude *.pyc __pycache__

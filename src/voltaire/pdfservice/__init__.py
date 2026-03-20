@@ -1,3 +1,6 @@
+# Copyright (C) 2026 Voltaire Claims
+# SPDX-License-Identifier: AGPL-3.0-only
+
 """Voltaire PDF service core package."""
 
 from importlib.metadata import PackageNotFoundError, packages_distributions

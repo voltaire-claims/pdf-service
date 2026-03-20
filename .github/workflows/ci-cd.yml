@@ -163,6 +163,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install uv
+        run: pip install uv
+
+      - name: Build Python package
+        run: uv build
+
       - name: Create git tag
         env:
           VERSION: v${{ needs.cd-preflight.outputs.version }}
@@ -174,4 +180,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: v${{ needs.cd-preflight.outputs.version }}
-        run: gh release create "$VERSION" --generate-notes --title "$VERSION"
+        run: gh release create "$VERSION" --generate-notes --title "$VERSION" dist/*

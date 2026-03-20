@@ -1,3 +1,6 @@
+# Copyright (C) 2026 Voltaire Claims
+# SPDX-License-Identifier: AGPL-3.0-only
+
 """Models package for PDF service requests and responses."""
 
 from .requests import FromHtmlRequest

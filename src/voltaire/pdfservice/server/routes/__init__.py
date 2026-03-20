@@ -1,3 +1,6 @@
+# Copyright (C) 2026 Voltaire Claims
+# SPDX-License-Identifier: AGPL-3.0-only
+
 """Route registration for the PDF service."""
 
 from voltaire.pdfservice.server.routes.conversion import (

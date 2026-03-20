@@ -1,3 +1,6 @@
+# Copyright (C) 2026 Voltaire Claims
+# SPDX-License-Identifier: AGPL-3.0-only
+
 """Request models for PDF service endpoints."""
 
 from typing import Annotated, Literal

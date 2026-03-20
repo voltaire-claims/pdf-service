@@ -1,3 +1,6 @@
+# Copyright (C) 2026 Voltaire Claims
+# SPDX-License-Identifier: AGPL-3.0-only
+
 """Shared helpers for route handlers."""
 
 from __future__ import annotations
