@@ -1,0 +1,74 @@
+[project]
+name = "voltaire-pdf-service"
+version = "0.1.0"
+description = "Open-source PDF microservice extracting PyMuPDF operations from voltaire-app"
+requires-python = ">=3.14"
+license = "AGPL-3.0-only"
+dependencies = [
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+server = [
+    "apiflask>=3.0.2",
+    "PyMuPDF~=1.27.2",
+    "Pillow>=12.1.1",
+    "beautifulsoup4>=4.14.3",
+]
+client = [
+    "httpx>=0.28.1",
+]
+dev = [
+    "pytest~=9.0.2",
+    "pytest-asyncio~=1.3.0",
+    "ruff~=0.15.5",
+    "ty~=0.0.21",
+    "pre-commit~=4.5.1",
+    "types-beautifulsoup4~=4.12.0.20250516",
+]
+
+[project.scripts]
+server = "voltaire.pdfservice.server.app:run"
+
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+src = ["src"]
+target-version = "py314"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["COM812"]  # conflicts with ruff formatter
+
+[tool.ruff.lint.per-file-ignores]
+# S101: assert is standard in pytest
+# PLR2004: magic values in assertions (status codes, counts) are idiomatic in tests
+# D100/D103/D104: test names are self-documenting
+"tests/**/*.py" = ["S101", "PLR2004", "D100", "D101", "D102", "D103", "D104"]
+# EM101/EM102/TRY003: ServiceError carries a user-facing message, not a debug string
+"src/**/routes/**/*.py" = ["EM101", "EM102", "TRY003"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["voltaire"]
+
+[tool.ty]
+# Flask/APIFlask decorators use a T_route bound that rejects Pydantic model
+# return types even though PydanticAPIFlask.make_response handles them at runtime.
+# The redirect() return type (werkzeug Response vs Flask Response) also triggers.
+[[tool.ty.overrides]]
+include = ["src/**/routes/"]
+
+[tool.ty.overrides.rules]
+invalid-argument-type = "ignore"
+
+[tool.ty.environment]
+extra-paths = ["typings"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

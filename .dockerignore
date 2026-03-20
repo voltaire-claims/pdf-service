@@ -1,0 +1,16 @@
+.venv/
+.git/
+.idea/
+.ruff_cache/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+tests/
+typings/
+
+# uv.lock is the source of truth; requirements.txt may be generated for
+# tooling (e.g. Snyk) and should never be copied into the image.
+requirements.txt

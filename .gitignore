@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+.ruff_cache/
+.pytest_cache/
+.idea/
+.mypy_cache/
+
+# uv.lock is the source of truth for dependencies; requirements.txt is only
+# generated on-the-fly for tools that don't support uv.lock (e.g. Snyk SCA).
+requirements.txt
