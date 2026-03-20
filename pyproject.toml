@@ -1,6 +1,6 @@
 [project]
 name = "voltaire-pdf-service"
-version = "0.1.1"
+version = "0.1.2"
 description = "Open-source PDF microservice extracting PyMuPDF operations from voltaire-app"
 requires-python = ">=3.14"
 license = "AGPL-3.0-only"
