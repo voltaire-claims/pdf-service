@@ -17,7 +17,8 @@ RUN apk upgrade --no-cache && \
     openjpeg-dev \
     jbig2dec-dev \
     'zlib-dev>=1.3.2' \
-    swig
+    swig \
+    'xz-libs>=5.8.3-r0'
 
 RUN python -m venv /app/venv
 ENV PATH="/app/venv/bin:$PATH"
@@ -52,7 +53,8 @@ RUN apk upgrade --no-cache && \
     openjpeg \
     jbig2dec \
     'zlib>=1.3.2' \
-    libstdc++
+    libstdc++ \
+    'xz-libs>=5.8.3-r0'
 
 RUN adduser -D -h /app appuser
 
