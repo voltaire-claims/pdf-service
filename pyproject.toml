@@ -15,6 +15,10 @@ server = [
     "Pillow>=12.3.0",
     "beautifulsoup4>=4.14.3",
 ]
+deployment = [
+    "voltaire-pdf-service[server]",
+    "gunicorn>=26.2.0",
+]
 client = [
     "httpx>=0.28.1",
 ]
