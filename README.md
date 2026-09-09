@@ -69,10 +69,12 @@ repository variable and `DOCKER_HUB_PASSWORD` repository secret, matching
 
 ### With a WSGI Server
 
-The application exposes a standard WSGI entry point at `voltaire.pdfservice.server.app:create_app()`. For example, with gunicorn:
+The application exposes a standard WSGI entry point at `voltaire.pdfservice.server.app:create_app()`.
+
+The `deployment` extra includes `server` and Gunicorn, as used by the Docker image:
 
 ```bash
-pip install "voltaire-pdf-service[server]" gunicorn
+pip install "voltaire-pdf-service[deployment]"
 gunicorn "voltaire.pdfservice.server.app:create_app()" --bind 0.0.0.0:8080 --workers 4
 ```
 

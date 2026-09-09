@@ -14,8 +14,7 @@ WORKDIR /app
 # Install dependencies (cached unless lock/pyproject changes)
 COPY pyproject.toml uv.lock ./
 ARG CACHE_BUST
-RUN uv sync --locked --no-dev --extra server --no-install-project && \
-    uv pip install --python /app/venv/bin/python gunicorn
+RUN uv sync --locked --no-dev --extra deployment --no-install-project
 
 # Install app
 COPY src/ src/
