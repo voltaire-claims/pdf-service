@@ -44,6 +44,10 @@ pip install "voltaire-pdf-service[client] @ git+https://github.com/voltaire-clai
 
 ### With Docker (recommended)
 
+The image uses Docker Hardened Images for Python 3.14 and runs as UID `65532`.
+PyMuPDF uses prebuilt manylinux wheels, with required shared libraries copied
+from the build stage into the minimal runtime.
+
 ```bash
 docker run -p 8080:80 \
   -e MAX_PDF_SIZE_MB=50 \
@@ -51,6 +55,17 @@ docker run -p 8080:80 \
   -e MAX_PAGE_LIMIT=50 \
   ghcr.io/voltaire-claims/pdf-service:latest
 ```
+
+To build locally, authenticate to the hardened image registry first:
+
+```bash
+docker login dhi.io
+docker compose up --build
+```
+
+Use your Docker Hub credentials. CI builds use the `DOCKER_HUB_USERNAME`
+repository variable and `DOCKER_HUB_PASSWORD` repository secret, matching
+`voltaire-app`.
 
 ### With a WSGI Server
 

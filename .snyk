@@ -1,13 +1,28 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
 version: v1.25.1
-# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+# Documented vulnerability exceptions.
 ignore:
-  SNYK-ALPINE323-ZLIB-15435529:
+  SNYK-PYTHON-PYMUPDF-13058632:
+    - '*':
+        reason: The code is not affected by this vulnerability
+        created: 2025-11-01T22:47:30.194Z
+  SNYK-PYTHON-PYMUPDF-15923526:
     - '*':
         reason: >-
-          Resolved by pinning zlib>=1.3.2 in the Dockerfile and busting the
-          Docker layer cache to ensure the upgrade is applied on every build.
-        created: 2026-03-19T00:00:00.000Z
+          Temporarily accepted for six months to preserve HTML export compatibility:
+          the fixed PyMuPDF version changes exported HTML and would be a breaking
+          change. Reassess later releases for output comparable to PyMuPDF 1.27.2
+          before this exception expires.
+        created: 2026-09-09T00:10:00.000Z
+        expires: 2027-03-09T01:10:00.000Z
+  SNYK-DEBIAN13-ZLIB-19520500:
+    - '*':
+        reason: >-
+          False positive: CVE-2026-85091 is fixed by Docker's backported patch in DHI zlib
+          1:1.3.dfsg+really1.3.1-1+dhi3. Both container architectures were verified
+          to contain the patched library. Docker marks this package not_affected
+          in https://github.com/docker-hardened-images/advisories/blob/main/pkg/deb/debian/zlib/zlib.vex.json.
+        created: 2026-09-08T00:00:00.000Z
 patch: {}
 exclude:
   global:
