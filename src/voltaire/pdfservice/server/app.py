@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import os
 import uuid
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from apiflask import APIFlask
 from pydantic import BaseModel
@@ -37,7 +37,7 @@ class PydanticAPIFlask(APIFlask):
         if isinstance(rv, BaseModel):
             rv = rv.model_dump(exclude_none=True)
         elif isinstance(rv, tuple) and rv and isinstance(rv[0], BaseModel):
-            rv = (rv[0].model_dump(exclude_none=True), *rv[1:])  # type: ignore[assignment]
+            rv = cast("ft.ResponseReturnValue", (rv[0].model_dump(exclude_none=True), *rv[1:]))
         return super().make_response(rv)
 
 

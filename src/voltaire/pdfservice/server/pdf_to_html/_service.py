@@ -6,7 +6,7 @@
 import logging
 import re
 from collections import defaultdict
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
 
 from bs4 import BeautifulSoup
 
@@ -793,7 +793,7 @@ class PDFToHTMLService:
     def _extract_spans_for_page(self, page: pymupdf.Page) -> list[Span]:
         """Extract all text spans from a single page."""
         spans: list[Span] = []
-        blocks: list[dict[str, Any]] = page.get_text("dict")["blocks"]  # type: ignore[assignment]
+        blocks = cast("list[dict[str, Any]]", page.get_text("dict")["blocks"])
         for block in blocks:
             if block["type"] != 0:
                 continue
